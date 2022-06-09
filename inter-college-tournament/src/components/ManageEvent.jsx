@@ -1,10 +1,13 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { Admin_Event_View } from './Admin_Event_View'
+import { Admin_Home } from './Admin_Home'
 
 export const Admin_Manage_Event = ({ id }) => {
     // let [ide,setide]=useState(id)
     let url1 = "http://localhost:8000/view"
     // const [points, setPoints] = useState();
+    let [ren, setRen] = useState("first")
     let [hold, setHold] = useState({
         des: "",
         date: "",
@@ -25,6 +28,7 @@ export const Admin_Manage_Event = ({ id }) => {
             .then((res) => {
                 console.log(res)
             })
+        setRen("admin");
     }
 
     let doner = (e) => {
@@ -46,6 +50,8 @@ export const Admin_Manage_Event = ({ id }) => {
     if (hold.matchs) {
         return (
             <>
+                {
+                    ren==="first" &&
                 <div className="container">
                     <div style={{ marginBottom: "5%" }}>
                         <h1>Manage Event</h1>
@@ -64,13 +70,13 @@ export const Admin_Manage_Event = ({ id }) => {
                     </div>
                     <div className="mb-3">
                         <label for="exampleFormControlInput1" className="form-label">Entered Team</label>
-                        <input type="email"className="form-control" value={
+                        <input type="email" className="form-control" value={
                             hold.matchs.map(ele => {
-                                return(
-                                    ele.college+"     "
+                                return (
+                                    ele.college + "     "
                                 )
                             })
-                            } id="exampleFormControlInput1" disabled />
+                        } id="exampleFormControlInput1" disabled />
                     </div>
                     <div className="mb-3">
                         <label for="exampleFormControlTextarea1" className="form-label">Match Schedule</label>
@@ -80,39 +86,15 @@ export const Admin_Manage_Event = ({ id }) => {
                         <label for="exampleFormControlTextarea1" className="form-label">Enter College Name and Points</label>
                         <textarea className="form-control" id="exampleFormControlTextarea1" name='leader' value={hold.leader} onChange={doner} rows="3"></textarea>
                     </div>
-                    {/* <div class="row g-2">
-                        <div class="col-md">
-                            <div class="form-floating">
-                                <select class="form-select" id="floatingSelectGrid" onChange={collegeHandler}>
-                                    <option selected>Select Collage Name From Menu</option>
-                                    {
-                                        hold.matchs.map(ele => {
-                                            return (
-                                                <option value={ele.points}>{ele.college}</option>
-                                            )
-                                        })
-
-                                    }
-                                </select>
-                                <label for="floatingSelectGrid">College Name</label>
-                            </div>
-                        </div>
-                        <div class="col-md">
-                            <div class="form-floating">
-                                <input type="email" class="form-control" id="floatingInputGrid" value={points}  />
-                                
-                                <label for="floatingInputGrid">Points Obtain</label>
-                            </div>
-                        </div>
-                        <div >
-
-                        </div>
-                    </div> */}
                     <div className="holder" style={{ display: "flex", justifyContent: "space-between", marginTop: "20px" }}>
                         <button type="button" class="btn btn-primary btn-lg " onClick={updateEvent}>Save</button>
                         <button type="button" class="btn btn-danger btn-lg ">Delete</button>
+                
                     </div>
+            
                 </div>
+                }
+                {ren === "admin" && <Admin_Event_View />}
             </>
         )
     }

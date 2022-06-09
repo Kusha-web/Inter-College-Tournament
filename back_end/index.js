@@ -137,6 +137,17 @@ app.post('/login',(req,res)=>{
     })
 })
 
+app.get('/college', (req, res) => {
+    vold.find({},(err,data)=>{
+        if(err){
+            res.send(err)
+        }
+        else{
+            res.json(data)
+        }
+    })
+})
+
 app.get('/',(req,res)=>{
     res.send("fuck world")
 })

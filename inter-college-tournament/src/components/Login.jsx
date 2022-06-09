@@ -33,6 +33,7 @@ export const LogIn = () => {
       // if(res.data.checker) {
       //     <Link to="admoin"></Link>
       // }
+      navi('../');
     })
     .catch(err=>{alert(err)})
     console.log(hold);
